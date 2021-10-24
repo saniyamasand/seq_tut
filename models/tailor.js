@@ -6,6 +6,7 @@ module.exports = (sequelize, type) => {
             autoIncrement: true
         },
         tailorName: type.STRING,
-        tailorPhone : type.INTEGER
+        tailorPhone : type.STRING,
+        customerName: type.STRING
     })
 }
