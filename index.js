@@ -44,7 +44,7 @@ app.post('/demoApi/customer', (req, res) => {
 
 // create a appointment
 
-app.post('/demoApi/appointment', (req, res) => {
+app.post('/demoApi/appt', (req, res) => {
     console.log(req.body)
     Appointment.create(req.body)
         .then(appointment => res.json(appointment))
@@ -96,7 +96,7 @@ app.get('/demoApi/customers', (req, res) => {
 })
 
 // get all appointments
-app.get('/demoApi/appointments', (req, res) => {
+app.get('/demoApi/appts', (req, res) => {
     Appointment.findAll().then(appointments =>
         res.json(appointments
         ))
@@ -115,6 +115,39 @@ app.get('/demoApi/tailors', (req, res) => {
         res.json(tailors
         ))
 })
+
+// update appointment by id
+
+app.put('/demoApi/appt/:id', function(req, res) {
+    Appointment.findByPk(req.params.id).then(function(note) {
+        note.update({
+            orderCustomer: req.body.orderCustomer,
+            orderDescription: req.body.orderDescription,
+            apptDate: req.body.apptDate,
+            apptTime: req.body.apptTime
+        }).then((note) => {
+            res.json(note);
+        });
+    });
+});
+
+// delete appointment by id
+
+app.delete('/demoApi/appt/:id', function(req, res) {
+    Appointment.findByPk(req.params.id).then(function(note) {
+        note.destroy();
+    }).then((note) => {
+        res.sendStatus(200);
+    });
+});
+
+
+
+
+
+
+
+
 
 // get book by  bookId
 app.get('/demoApi/book/:id', (req, res) => {
@@ -142,6 +175,32 @@ query = Author.findAll({
 })
 return query.then(author => res.json(author))
 })
+// update authors
+app.put('/demoApi/author/:id', function(req, res) {
+    Author.findByPk(req.params.id).then(function(note) {
+        note.update({
+            authorName: req.body.authorName
+        }).then((note) => {
+            res.json(note);
+        });
+    });
+});
+
+app.delete('/demoApi/author/:id', function(req, res) {
+    Author.findByPk(req.params.id).then(function(note) {
+        note.destroy();
+    }).then((note) => {
+        res.sendStatus(200);
+    });
+});
+
+
+
+
+
+
+
+
 const port = 3001
 app.listen(port, () => {console.log(`Running on http://localhost:${port}`)
 })

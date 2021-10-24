@@ -24,6 +24,9 @@ const Customer = CustomerModel(sequelize, Sequelize)
 const Appointment = AppointmentModel(sequelize, Sequelize)
 const Transaction = TransactionModel(sequelize, Sequelize)
 const Tailor = TailorModel(sequelize, Sequelize)
+
+
+
 // Author has Many to book
 Author.hasMany(Book)
 sequelize.sync({ force: false })
@@ -37,6 +40,7 @@ module.exports = {
     Customer,
     Appointment,
     Transaction,
-    Tailor
+    Tailor,
+
 
 }

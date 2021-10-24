@@ -1,11 +1,15 @@
 module.exports = (sequelize, type) => {
-    return sequelize.define('appointment', {
-        appoinmentId: {
+    return sequelize.define('appt', {
+        apptId: {
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        customerId: type.INTEGER,
-        appointmentDate : type.STRING
+        apptDate : type.STRING,
+        apptTime : type.STRING,
+        orderCustomer:type.STRING,
+        orderDescription:type.STRING,
     })
 }
+
+//customerId: type.INTEGER,
