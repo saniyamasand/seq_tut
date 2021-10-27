@@ -131,10 +131,96 @@ app.put('/demoApi/appt/:id', function(req, res) {
     });
 });
 
+// update customer by id
+
+app.put('/demoApi/customer/:id', function(req, res) {
+    Customer.findByPk(req.params.id).then(function(note) {
+        note.update({
+            customerName: req.body.customerName,
+            customerPhone: req.body.customerPhone,
+            customerAddress: req.body.customerAddress,
+            customerMeasurements: req.body.customerMeasurements
+        }).then((note) => {
+            res.json(note);
+        });
+    });
+});
+
+// update tailors by id
+
+app.put('/demoApi/tailor/:id', function(req, res) {
+    Tailor.findByPk(req.params.id).then(function(note) {
+        note.update({
+            tailorName: req.body.tailorName,
+            tailorPhone: req.body.tailorPhone,
+            customerName: req.body.customerName
+
+        }).then((note) => {
+            res.json(note);
+        });
+    });
+});
+
+// update transaction by id
+
+app.put('/demoApi/transaction/:id', function(req, res) {
+    Transaction.findByPk(req.params.id).then(function(note) {
+        note.update({
+            customerNAME: req.body.customerNAME,
+            transactionAmount: req.body.transactionAmount,
+            transactionDate: req.body.transactionDate
+
+        }).then((note) => {
+            res.json(note);
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
 // delete appointment by id
 
 app.delete('/demoApi/appt/:id', function(req, res) {
     Appointment.findByPk(req.params.id).then(function(note) {
+        note.destroy();
+    }).then((note) => {
+        res.sendStatus(200);
+    });
+});
+
+
+// delete customer by id
+
+app.delete('/demoApi/customer/:id', function(req, res) {
+    Customer.findByPk(req.params.id).then(function(note) {
+        note.destroy();
+    }).then((note) => {
+        res.sendStatus(200);
+    });
+});
+
+
+// delete tailor by id
+
+app.delete('/demoApi/tailor/:id', function(req, res) {
+    Tailor.findByPk(req.params.id).then(function(note) {
+        note.destroy();
+    }).then((note) => {
+        res.sendStatus(200);
+    });
+});
+
+
+// delete transaction by id
+
+app.delete('/demoApi/transaction/:id', function(req, res) {
+    Transaction.findByPk(req.params.id).then(function(note) {
         note.destroy();
     }).then((note) => {
         res.sendStatus(200);
@@ -147,8 +233,7 @@ app.delete('/demoApi/appt/:id', function(req, res) {
 
 
 
-
-
+/*############################===EARLIER REFERENCE===############################*/
 // get book by  bookId
 app.get('/demoApi/book/:id', (req, res) => {
     Book.findOne(
